@@ -4,6 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
+    "start": "gulp start",
+    "pug": "gulp pug_compile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -11,9 +13,12 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "electron-prebuilt": "^1.4.13",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "gulp": "^3.9.1"
   },
   "devDependencies": {
-    "electron": "1.7.9"
+    "electron": "1.7.9",
+    "electron-connect": "^0.6.2",
+    "gulp-pug": "^3.3.0"
   }
 }
