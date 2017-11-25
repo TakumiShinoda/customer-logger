@@ -12,7 +12,7 @@ gulp.task('pug_compile', () => {
 
 gulp.task('start', ['pug_compile'], () =>{
   electron.start();
-  gulp.watch(['./src/view/index.pug'], () =>{
+  gulp.watch(['./src/**'], () =>{
     gulp.run('pug_compile');
   });
   gulp.watch(['./main.js'], electron.restart);

@@ -11,13 +11,18 @@ ipcRenderer.on('addCustomer', (ev, id) => {
 ipcRenderer.on('deleteCustomer', (ev, id) => {
   var contentList = $('li#list').children('span');
   var idList = [];
+
   for(var i = 0;i < contentList.length; i++){
     idList.push(contentList[i].textContent);
   }
-
+  
   if(idList.indexOf(String(id)) >= 0){
     $('.'+String(id)).remove();
   }else{
     console.log('can not find')
   }
 });
+
+function load(url){
+  ipcRenderer.send('move_to_url', url);
+}

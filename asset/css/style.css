@@ -1,9 +1,23 @@
-html{
+html, body{
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-body {
-  width: 100%;
-  height: 100%;
+.content-center{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  margin: auto;
+
+  width: 50%;
+  height: 18px;
+}
+
+.select-button{
+  display: inline-block;
+  style='font-size: 50px;'
 }

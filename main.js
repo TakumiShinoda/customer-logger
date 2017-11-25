@@ -1,13 +1,13 @@
 'use strict'
 
-var express = require('express')
-var ex = express();
-var bodyParser = require('body-parser')
+const electron = require("electron");
+const ipc = electron.ipcMain;
+const express = require('express')
+const ex = express();
+const bodyParser = require('body-parser')
 
-var electron = require('electron');
 var app = electron.app;
 var BrowserWindow = electron.BrowserWindow;
-
 let mainWindow;
 
 app.on('window-all-closed', () => {
@@ -21,7 +21,7 @@ app.on('ready', () => {
     width: 800,
     height: 600
   });
-  mainWindow.loadURL('file://' + __dirname + '/dist/view/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/dist/views/index/index.html');
 
   mainWindow.on('closed', () => {
     mainWindow = null;
@@ -54,4 +54,9 @@ ex.post('/', (req, res) => {
       default:
         res.send('Your requests did not send\n');
     }
+});
+
+
+ipc.on('move_to_url', function(ev, url){
+  mainWindow.loadURL('file://' + __dirname + '/dist/views/' + url);
 });
