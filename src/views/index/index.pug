@@ -1,13 +1,9 @@
-html
-  head
-    meta(charset='utf-8')
-    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
-    script(src='../../../asset/javascript/index/renderer.js')
-    link(rel="stylesheet" type="text/css" href="../../../asset/css/style.css")
-  body(style='background: #000')
-    ul.content-center#content
-      center
-        li
-          input.select-button(type='button' value='管理者画面')
-        li.select-button
-          input.select-button(type='button' value='クライアント画面' onclick='load("client/index.html")')
+extends ../_layout.pug
+
+block header
+  ul.content-center#content
+    center
+      li
+        input.select-button(type='button' value='管理者画面')
+      li.select-button
+        input.select-button(type='button' value='クライアント画面' onclick='load("client/index.html")')

@@ -1,11 +1,7 @@
-html
-  head
-    meta(charset='utf-8')
-    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
-    script(src='../../../asset/javascript/index/renderer.js')
-    link(rel="stylesheet" type="text/css" href="../../../asset/css/style.css")
-  body(style='background: #000')
-    input(type='button' value='戻る' onclick='load("index/index.html")')
-    div(style='color: #fff')
-      ul#content(style='list-style:none;font-size: 120px;')
-        li 番号 - 時刻
+extends ../_layout.pug
+
+block header
+  input(type='button' value='戻る' onclick='load("index/index.html")')
+  div(style='color: #fff')
+    ul#content(style='list-style:none;font-size: 120px;')
+      li 番号 - 時刻
