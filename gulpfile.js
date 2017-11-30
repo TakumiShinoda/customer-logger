@@ -10,10 +10,18 @@ gulp.task('pug_compile', () => {
   .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('start', ['pug_compile'], () =>{
+gulp.task('asset_copy', () => {
+  gulp.src(['src/asset/**'], {base: 'src/asset'})
+  .pipe(gulp.dest('./dist/asset'));
+});
+
+gulp.task('start', ['pug_compile', 'asset_copy'], () =>{
   electron.start();
   gulp.watch(['./src/**'], () =>{
     gulp.run('pug_compile');
+  });
+  gulp.watch(['./src/asset/**'], () => {
+    gulp.run('asset_copy');
   });
   gulp.watch(['./main.js'], electron.restart);
 });
