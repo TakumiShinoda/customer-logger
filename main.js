@@ -49,6 +49,7 @@ app.on('ready', () => {
           res.send('Your requests sent\n');
           break;
         default:
+          mainWindow.webContents.send('alert', 'request id failed. You sent "'+data+'"');
           res.send('Your requests did not send\n');
       }
   });
