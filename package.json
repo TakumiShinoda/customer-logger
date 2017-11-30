@@ -6,6 +6,7 @@
   "scripts": {
     "start": "gulp start",
     "pug": "gulp pug_compile",
+    "test-pack": "electron-packager . test --platform=darwin --arch=x64 --version=1.4.13",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
