@@ -33,6 +33,7 @@ function send(){
         headers: {'Content-Type':'application/json'},
         data: '{"task": "delete", "id": '+number+'}',
         success: function(data){
+            console.log(data)
             openModal('sendCompModal');
             setTimeout(() => {
               closeModal('sendCompModal')
@@ -50,7 +51,7 @@ function send(){
 }
 
 function activate(){
-  var url = 'http://'+$('.IPAdress')[0].value+':4126';
+  var url = 'http://' + $('.IPAdress')[0].value + ':' + $('.serverPort')[0].value;
   $.ajax({
     url: url,
     type: 'POST',
