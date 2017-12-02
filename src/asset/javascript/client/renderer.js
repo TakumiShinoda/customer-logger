@@ -1,3 +1,5 @@
+var port = null;
+
 $(document).ready(() => {
   function getIP(){
     const os = require('os');
@@ -15,7 +17,12 @@ $(document).ready(() => {
     return addresses[0];
   }
 
-  $('.ipAdress')[0].textContent = "IP: " + getIP();
+  ipcRenderer.on('set_serverPort', (ev, port) => {
+    console.log(port)
+    $('.serverPort')[0].textContent = " | Port: " + port;
+  });
+
+  $('.IPAdress')[0].textContent = "IP: " + getIP();
   ipcRenderer.send('run_clientServer');
 });
 

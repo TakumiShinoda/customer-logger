@@ -2,7 +2,11 @@ extends ../_layout.pug
 
 block header
   div.contents
-    div.ipAdress(align='right') No IP Adress
+    ul(align='right')
+      li(style="display:inline")
+        div.IPAdress(align='right' style="display:inline") IP: No IP Adress
+      li(style="display:inline")
+        div.serverPort(align='right' style="display:inline") | Port: No Port
     div(style='color: #fff')
       ul#content(style='list-style:none;font-size: 100px;')
         li 番号 - 時刻

@@ -33,6 +33,7 @@ app.on('ready', () => {
 
   ipc.on('run_clientServer', function(ev){
     const server = ex.listen(port);
+    mainWindow.webContents.send('set_serverPort', port);
 
     server.on('error', (e) => {
       if(e){
@@ -42,7 +43,6 @@ app.on('ready', () => {
 
     ex.post('/', (req, res) => {
         var data = req.body;
-
         switch(data.task){
           case 'add':
             mainWindow.webContents.send('addCustomer', data.id);
