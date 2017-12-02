@@ -24,5 +24,9 @@ ul#content{
 
 .select-button{
   display: inline-block;
-  style='font-size: 50px;'
+  padding: 25px;
+}
+
+div.contents{
+  padding: 10px;
 }

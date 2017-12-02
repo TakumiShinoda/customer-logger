@@ -1,11 +1,9 @@
 extends ../_layout.pug
 
 block header
-  ul(style='padding:0')
-    li(style='display: inline-block;')
-      input(type='button' value='戻る' onclick='load("index/index.html")')
-    li(style='display: inline-block;')
-      p.ipAdress No IP Adress
-  div(style='color: #fff')
-    ul#content(style='list-style:none;font-size: 120px;')
-      li 番号 - 時刻
+  div.contents
+    div.ipAdress(align='right') No IP Adress
+    div(style='color: #fff')
+      ul#content(style='list-style:none;font-size: 100px;')
+        li 番号 - 時刻
+    input.btn.btn-primary(type='button' value='接続解除' onclick='load("index/index.html")')

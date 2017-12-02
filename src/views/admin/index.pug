@@ -1,12 +1,16 @@
 extends ../_layout.pug
 
 block header
-  input(type='button' value='戻る' onclick='load("index/index.html")')
-  p タスク
-  select.task
-    option 追加
-    option 削除
-  p 番号:
-  input.customer-number(type='text')
-  br
-  input(type='button' value='送信' onclick='send()')
+  div.contents
+    p タスク:
+    select.task
+      option 追加
+      option 削除
+    br
+    br
+    p 番号:
+    input.customer-number(type='text')
+    br
+    br
+    input.btn.btn-success(type='button' value='送信' onclick='send()')
+    input.btn.btn-primary(type='button' value='接続解除' onclick='load("index/index.html")')
