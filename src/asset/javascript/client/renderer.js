@@ -14,7 +14,9 @@ $(document).ready(() => {
     }
     return addresses[0];
   }
+
   $('.ipAdress')[0].textContent = "IP: " + getIP();
+  ipcRenderer.send('run_clientServer');
 });
 
 ipcRenderer.on('addCustomer', (ev, id) => {
