@@ -30,3 +30,12 @@ ul#content{
 div.contents{
   padding: 10px;
 }
+
+.modal{
+  width: 30%;
+  height:15%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

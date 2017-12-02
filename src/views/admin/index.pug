@@ -12,5 +12,20 @@ block header
     input.customer-number(type='text')
     br
     br
-    input.btn.btn-success(type='button' value='送信' onclick='send()')
+    input.btn.btn-success(type='button' value='送信' onclick='send();')
     input.btn.btn-primary(type='button' value='接続解除' onclick='load("index/index.html")')
+      
+  div.modal.inputIPModal(tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-show="true" data-keyboard="false" data-backdrop="static")
+    div.modal-dialog
+      div.modal-content(style="background:rgb(0,0,0);")
+        div.modal-body
+          center IPアドレス：
+            input.IPAdress(type='text')
+            input.btn.btn-success(type='button' value="接続" onclick='activate();')
+            input.btn.btn-primary(type='button' value="戻る" onclick='load("index/index.html");')
+      
+  div.modal.sendCompModal(tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-show="true" data-keyboard="false" data-backdrop="static")
+    div.modal-dialog
+      div.modal-content
+        div.modal-body(style="background:rgb(0,0,0);")
+          center.recipient 送信完了

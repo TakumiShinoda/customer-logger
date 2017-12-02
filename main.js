@@ -30,7 +30,7 @@ app.on('ready', () => {
   }));
   ex.use(bodyParser.json());
 
-  ex.listen(4126);
+  ex.listen(4122);
 
   ex.post('/', (req, res) => {
       var data = req.body;
@@ -48,6 +48,8 @@ app.on('ready', () => {
           mainWindow.webContents.send('ipc_log', data.id);
           res.send('Your requests sent\n');
           break;
+        case 'act':
+          res.send('アクティベートに成功しました。');
         default:
           mainWindow.webContents.send('alert', 'request id failed. You sent "'+data+'"');
           res.send('Your requests did not send\n');
