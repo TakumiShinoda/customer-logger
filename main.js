@@ -62,9 +62,20 @@ app.on('ready', () => {
             res.send('Your requests did not send\n');
         }
     });
+
+    ipc.on('closeServer', (ev) => {
+      server.close(() => {
+        console.log("server closed");
+      });
+    });
   });
 
-  ipc.on('move_to_url', function(ev, url){
+  ipc.on('move_to_url', (ev, url) => {
     mainWindow.loadURL('file://' + __dirname + '/dist/views/' + url);
   });
+
+  // for process debug
+  ipc.on('processLog', (ev, mes) => {
+    console.log(mes);
+  })
 });

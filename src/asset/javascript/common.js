@@ -1,5 +1,9 @@
 const ipcRenderer = require( 'electron' ).ipcRenderer;
 
+window.onbeforeunload = () => {
+    ipcRenderer.send('closeServer');
+};
+
 ipcRenderer.on('alert', (ev, mes) => {
   alert(mes);
 });
