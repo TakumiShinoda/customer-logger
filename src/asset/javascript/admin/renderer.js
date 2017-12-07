@@ -67,11 +67,3 @@ function activate(){
     }
   });
 }
-
-function openModal(name){
-  $('.' + name).modal();
-}
-
-function closeModal(name){
-  $('.' + name).modal('hide');
-}

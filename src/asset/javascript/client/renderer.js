@@ -2,11 +2,11 @@ var port = null;
 var customerInfo = [];
 
 $(document).ready(() => {
+  openModal('inputLoginPortModal');
   function getIP(){
     const os = require('os');
     const interfaces = os.networkInterfaces();
     var addresses = [];
-
     for (var k in interfaces) {
         for (var k2 in interfaces[k]) {
             var address = interfaces[k][k2];
@@ -18,12 +18,7 @@ $(document).ready(() => {
     return addresses[0];
   }
 
-  ipcRenderer.on('set_serverPort', (ev, port) => {
-    $('.serverPort')[0].textContent = " | Port: " + port;
-  });
-
   $('.IPAdress')[0].textContent = "IP: " + getIP();
-  ipcRenderer.send('run_clientServer');
   setInterval(() => {
     for(var i = 0;i < customerInfo.length;i++){
       customerInfo[0].time -= 1;
@@ -31,6 +26,16 @@ $(document).ready(() => {
     }
   }, 60000);
 });
+
+function openServer(){
+  var port = $('.loginPort')[0].value;
+  ipcRenderer.send('run_clientServer', port);
+}
+
+ipcRenderer.on('serverOpend', (ev, port) => {
+  $('.serverPort')[0].textContent = " | Port: " + port;
+  closeModal('inputLoginPortModal');
+})
 
 ipcRenderer.on('addCustomer', (ev, id) => {
   customerInfo.push({'id': id, 'time': 120})

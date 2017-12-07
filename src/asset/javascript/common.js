@@ -4,6 +4,14 @@ window.onbeforeunload = () => {
     ipcRenderer.send('closeServer');
 };
 
+function openModal(name){
+  $('.' + name).modal();
+}
+
+function closeModal(name){
+  $('.' + name).modal('hide');
+}
+
 ipcRenderer.on('alert', (ev, mes) => {
   alert(mes);
 });

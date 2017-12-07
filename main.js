@@ -3,12 +3,13 @@
 const electron = require("electron");
 const ipc = electron.ipcMain;
 const express = require('express')
+const http = require('http')
 const ex = express();
 const bodyParser = require('body-parser')
 
 var app = electron.app;
 var BrowserWindow = electron.BrowserWindow;
-var port = 4126;
+var port = null;
 let mainWindow;
 
 app.on('window-all-closed', () => {
@@ -31,42 +32,46 @@ app.on('ready', () => {
   }));
   ex.use(bodyParser.json());
 
-  ipc.on('run_clientServer', function(ev){
-    const server = ex.listen(port);
-    mainWindow.webContents.send('set_serverPort', port);
-
-    server.on('error', (e) => {
-      if(e){
-        console.log('this port is used')
-      }
-    })
-
-    ex.post('/', (req, res) => {
-        var data = req.body;
-        switch(data.task){
-          case 'add':
-            mainWindow.webContents.send('addCustomer', data.id);
-            res.send('Your requests sent\n');
-            break;
-          case 'delete':
-            mainWindow.webContents.send('deleteCustomer', data.id);
-            res.send('Your requests sent\n');
-            break;
-          case 'log':
-            mainWindow.webContents.send('ipc_log', data.id);
-            res.send('Your requests sent\n');
-            break;
-          case 'act':
-            res.send('アクティベートに成功しました。');
-          default:
-            res.send('Your requests did not send\n');
-        }
-    });
-
-    ipc.on('closeServer', (ev) => {
-      server.close(() => {
-        console.log("server closed");
+  ipc.on('run_clientServer', (ev, request) => {
+    let server = http.createServer(ex);
+    port = request
+    if(request && parseInt(port) < 65536){
+      server.listen(port, () => {
+        mainWindow.webContents.send('serverOpend', port);
+        ex.post('/', (req, res) => {
+            var data = req.body;
+            switch(data.task){
+              case 'add':
+                mainWindow.webContents.send('addCustomer', data.id);
+                res.send('Your requests sent\n');
+                break;
+              case 'delete':
+                mainWindow.webContents.send('deleteCustomer', data.id);
+                res.send('Your requests sent\n');
+                break;
+              case 'log':
+                mainWindow.webContents.send('ipc_log', data.id);
+                res.send('Your requests sent\n');
+                break;
+              case 'act':
+                res.send('アクティベートに成功しました。');
+              default:
+                res.send('Your requests did not send\n');
+            }
+        });
+        ipc.on('closeServer', (ev) => {
+          server.close(() => {
+            console.log("server closed");
+          });
+        });
       });
+    }else if(parseInt(port) >= 65536){
+      mainWindow.webContents.send('alert', 'ポート番号は65536未満で入力してください。');
+    }else{
+      mainWindow.webContents.send('alert', 'ポートが入力されていません');
+    }
+    server.on('error', (e) => {
+      mainWindow.webContents.send('alert', 'このポートはすでに使用されています。');
     });
   });
 
