@@ -21,6 +21,7 @@ app.on('ready', () => {
     width: 800,
     height: 600
   });
+  mainWindow.setFullScreen(true);
   mainWindow.loadURL('file://' + __dirname + '/dist/views/index/index.html');
 
   mainWindow.on('closed', () => {
