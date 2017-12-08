@@ -6,10 +6,13 @@ block header
       li(style="display:inline")
         div.IPAdress(align='right' style="display:inline") IP: No IP Adress
       li(style="display:inline")
-        div.serverPort(align='right' style="display:inline") | Port: No Port
-    div(style='color: #fff')
-      ul#content(style='list-style:none;font-size: 100px;')
-        li 番号 - 残り
+        div.serverPort(align='right' style="display:inline") | Port: No Port        
+    table#table.table.table-hover(style="font-size:50px;")
+      thead
+        tr
+          th 番号
+          th 残り時間
+          
     input.btn.btn-primary(type='button' value='接続解除' onclick='load("index/index.html")')
       
   div.modal.inputLoginPortModal(tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-show="true" data-keyboard="false" data-backdrop="static")
