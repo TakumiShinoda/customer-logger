@@ -21,8 +21,8 @@ $(document).ready(() => {
   $('.IPAdress')[0].textContent = "IP: " + getIP();
   setInterval(() => {
     for(var i = 0;i < customerInfo.length;i++){
-      customerInfo[0].time -= 1;
-      $('span.timer' + customerInfo[i].id)[0].textContent = customerInfo[0].time;
+      customerInfo[i].time -= 1;
+      $('span.timer' + customerInfo[i].id)[0].textContent = customerInfo[i].time;
     }
   }, 60000);
 });
@@ -39,19 +39,16 @@ ipcRenderer.on('serverOpend', (ev, port) => {
 
 ipcRenderer.on('addCustomer', (ev, id) => {
   customerInfo.push({'id': id, 'time': 120})
-  // $('ul#content').append('<li id=customerList class='+ id +'><span class='+ id +'>'+ id +'</span> - <span class=timer'+id+'>120</span>分</li>')
-
   var table = document.getElementById('table');
   var row = table.insertRow(-1);
+
   row.className = id
   row.insertCell(-1).innerHTML = '<span id=customerList class='+ id +'><span class='+ id +'>'+ id +'</span>'
   row.insertCell(-1).innerHTML = '<span class=timer'+id+'>120</span>分</span>';
 });
 
 ipcRenderer.on('deleteCustomer', (ev, id) => {
-  var contentList = $('li#customerList').children('span');
   var idList = [];
-
   var contentList = $('#customerList').children('span');
 
   for(var i = 0;i < contentList.length; i++){
