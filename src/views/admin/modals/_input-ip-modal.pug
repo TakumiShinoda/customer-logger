@@ -1,0 +1,10 @@
+div.modal.inputIPModal(tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-show="true" data-keyboard="false" data-backdrop="static")
+  div.modal-dialog
+    div.modal-content(style="background:rgb(0,0,0);")
+      div.modal-body
+        center IPアドレス：
+          input.IPAdress(type='text' style='width:120px;')
+          span ：
+          input.serverPort(type='text' style='width:50px;')
+          input.btn.btn-success(type='button' value="接続" onclick='activate();')
+          input.btn.btn-primary(type='button' value="戻る" onclick='load("index/index.html");')

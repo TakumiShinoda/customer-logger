@@ -1,0 +1,8 @@
+div.modal.inputLoginPortModal(tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-show="true" data-keyboard="false" data-backdrop="static")
+  div.modal-dialog
+    div.modal-content(style="background:rgb(0,0,0);")
+      div.modal-body
+        center 使用するポート番号：
+          input.loginPort(type='text' style='width:120px;')
+          input.btn.btn-success(type='button' value="接続" onclick='openServer($(".loginPort")[0].textContent)')
+          input.btn.btn-primary(type='button' value="戻る" onclick='load("index/index.html");')
