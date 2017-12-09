@@ -50,7 +50,13 @@ app.on('ready', () => {
               res.send('Your requests sent\n');
               break;
             case 'act':
+              mainWindow.webContents.send('comp_activate', data.id);
               res.send('アクティベートに成功しました。');
+              break;
+            case 'dis':
+              mainWindow.webContents.send('disconected');
+              res.send('切断されました。');
+              break;
             default:
               res.send('Your requests did not send\n');
           }

@@ -80,3 +80,18 @@ function activate(){
     alert('IPアドレスまたはポート番号が正しくありません。');
   }
 }
+
+function disconnect(){
+  console.log(connectedUrl)
+  $.ajax({
+    url: connectedUrl,
+    type: 'POST',
+    headers: {'Content-Type':'application/json'},
+    data: '{"task": "dis", "id": 0}',
+    success: function(data){
+    },
+    error: function(data) {
+      alert('既にサーバーと切断されています。')
+    }
+  });
+}

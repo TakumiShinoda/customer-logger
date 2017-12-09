@@ -18,7 +18,7 @@ $(document).ready(() => {
     return addresses[0];
   }
 
-  $('.IPAdress')[0].textContent = "IP: " + getIP();
+  $('.IPAdress')[0].textContent = " | IP: " + getIP();
   setInterval(() => {
     for(var i = 0;i < customerInfo.length;i++){
       customerInfo[i].time -= 1;
@@ -42,8 +42,16 @@ function openServer(){
 
 ipcRenderer.on('serverOpend', (ev, port) => {
   $('.serverPort')[0].textContent = " | Port: " + port;
+  $('.serverStatus')[0].textContent = 'Idle'
+  $('.serverStatus').css('color', 'rgb(209, 150, 90)')
   closeModal('inputLoginPortModal');
-})
+});
+
+ipcRenderer.on('comp_activate', (ev, id) => {
+  console.log('pass')
+  $('.serverStatus')[0].textContent = 'Connected'
+  $('.serverStatus').css('color', 'rgb(152, 195, 121)')
+});
 
 ipcRenderer.on('addCustomer', (ev, id) => {
   customerInfo.push({'id': id, 'time': 120})
@@ -74,4 +82,10 @@ ipcRenderer.on('deleteCustomer', (ev, id) => {
       customerInfo.splice(i, 1);
     }
   }
+});
+
+ipcRenderer.on('disconected', (ev) => {
+  $('.serverStatus')[0].textContent = 'Idle';
+  $('.serverStatus').css('color', 'rgb(209, 150, 90)');
+  alert('接続先から切断されました。');
 });

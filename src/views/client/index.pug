@@ -3,7 +3,10 @@ include ../_header.pug
   div.contents
     ul(align='right')
       li(style="display:inline")
-        div.IPAdress(align='right' style="display:inline") IP: No IP Adress
+        span Status: 
+        span.serverStatus(style="color:rgb(255, 0, 0)") Closed
+      li(style="display:inline")
+        div.IPAdress(align='right' style="display:inline") | IP: No IP Adress
       li(style="display:inline")
         div.serverPort(align='right' style="display:inline") | Port: No Port        
     table#table.table.table-hover(style="font-size:50px;")
