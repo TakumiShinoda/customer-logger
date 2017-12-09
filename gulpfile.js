@@ -19,8 +19,6 @@ gulp.task('start', ['pug_compile', 'asset_copy'], () =>{
   electron.start();
   gulp.watch(['./src/**'], () =>{
     gulp.run('pug_compile');
-  });
-  gulp.watch(['./src/asset/**'], () => {
     gulp.run('asset_copy');
   });
   gulp.watch(['./main.js'], electron.restart);

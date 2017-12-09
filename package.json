@@ -15,7 +15,8 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "validatorjs": "^3.13.6"
   },
   "devDependencies": {
     "electron": "1.7.9",

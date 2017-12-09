@@ -29,7 +29,15 @@ $(document).ready(() => {
 
 function openServer(){
   var port = $('.loginPort')[0].value;
-  ipcRenderer.send('run_clientServer', port);
+  if(new Validator({port: port}, {port: 'required'}).fails()){
+    alert('ポート番号を入力してください。');
+  }else if(new Validator({port: port}, {port: 'numeric'}).fails()){
+    alert('数字以外はポート番号に指定できません。');
+  }else if(new Validator({port: port}, {port: ['numeric', {'min': 1024}, {'max': 65535}]}).fails()){
+    alert('ポート番号は1024以上、65536未満で入力してください。');
+  }else{
+    ipcRenderer.send('run_clientServer', port);
+  }
 }
 
 ipcRenderer.on('serverOpend', (ev, port) => {

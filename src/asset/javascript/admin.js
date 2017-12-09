@@ -51,19 +51,32 @@ function send(){
 }
 
 function activate(){
-  var url = 'http://' + $('.IPAdress')[0].value + ':' + $('.serverPort')[0].value;
-  $.ajax({
-    url: url,
-    type: 'POST',
-    headers: {'Content-Type':'application/json'},
-    data: '{"task": "act", "id": 38}',
-    success: function(data){
-        connectedUrl = url;
-        alert(data);
-        closeModal("inputIPModal");
-    },
-    error: function(data) {
-        alert('正しいIPを入力してください。');
-    }
-  });
+  let ipAdress = $('.IPAdress')[0].value;
+  let port = $('.serverPort')[0].value;
+  let vldobj = {'ip': ipAdress, 'port': port};
+  console.log(vldobj)
+  let vldop = {
+    'ip': 'required',
+    'port': ['required', 'numeric', {'max': 65535}],
+  }
+
+  if(new Validator(vldobj, vldop).passes()){
+    var url = 'http://' + ipAdress + ':' + port;
+    $.ajax({
+      url: url,
+      type: 'POST',
+      headers: {'Content-Type':'application/json'},
+      data: '{"task": "act", "id": 38}',
+      success: function(data){
+          connectedUrl = url;
+          alert(data);
+          closeModal("inputIPModal");
+      },
+      error: function(data) {
+          alert('正しいIPを入力してください。');
+      }
+    });
+  }else{
+    alert('IPアドレスまたはポート番号が正しくありません。');
+  }
 }

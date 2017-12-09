@@ -1,4 +1,5 @@
-const ipcRenderer = require( 'electron' ).ipcRenderer;
+const ipcRenderer = require('electron').ipcRenderer;
+const Validator = require('validatorjs')
 
 window.onbeforeunload = () => {
     ipcRenderer.send('closeServer');

@@ -9,7 +9,6 @@ const bodyParser = require('body-parser')
 
 var app = electron.app;
 var BrowserWindow = electron.BrowserWindow;
-var port = null;
 let mainWindow;
 
 app.on('window-all-closed', () => {
@@ -23,65 +22,53 @@ app.on('ready', () => {
   });
   mainWindow.setFullScreen(true);
   mainWindow.loadURL('file://' + __dirname + '/dist/views/index/index.html');
-
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
 
-  ex.use(bodyParser.urlencoded({
-      extended: true
-  }));
+  ex.use(bodyParser.urlencoded({extended: true}));
   ex.use(bodyParser.json());
 
-  ipc.on('run_clientServer', (ev, request) => {
+  ipc.on('run_clientServer', (ev, port) => {
     let server = http.createServer(ex);
-    port = request
-    if(request && parseInt(port) < 65536){
-      server.listen(port, () => {
-        mainWindow.webContents.send('serverOpend', port);
-        ex.post('/', (req, res) => {
-            var data = req.body;
-            switch(data.task){
-              case 'add':
-                mainWindow.webContents.send('addCustomer', data.id);
-                res.send('Your requests sent\n');
-                break;
-              case 'delete':
-                mainWindow.webContents.send('deleteCustomer', data.id);
-                res.send('Your requests sent\n');
-                break;
-              case 'log':
-                mainWindow.webContents.send('ipc_log', data.id);
-                res.send('Your requests sent\n');
-                break;
-              case 'act':
-                res.send('アクティベートに成功しました。');
-              default:
-                res.send('Your requests did not send\n');
-            }
-        });
-        ipc.on('closeServer', (ev) => {
-          server.close(() => {
-            console.log("server closed");
-          });
-        });
+
+    server.listen(port, () => {
+      mainWindow.webContents.send('serverOpend', server.address().port);
+      ex.post('/', (req, res) => {
+          var data = req.body;
+          switch(data.task){
+            case 'add':
+              mainWindow.webContents.send('addCustomer', data.id);
+              res.send('Your requests sent\n');
+              break;
+            case 'delete':
+              mainWindow.webContents.send('deleteCustomer', data.id);
+              res.send('Your requests sent\n');
+              break;
+            case 'log':
+              mainWindow.webContents.send('ipc_log', data.id);
+              res.send('Your requests sent\n');
+              break;
+            case 'act':
+              res.send('アクティベートに成功しました。');
+            default:
+              res.send('Your requests did not send\n');
+          }
       });
-    }else if(parseInt(port) >= 65536){
-      mainWindow.webContents.send('alert', 'ポート番号は65536未満で入力してください。');
-    }else{
-      mainWindow.webContents.send('alert', 'ポートが入力されていません');
-    }
+    });
+
     server.on('error', (e) => {
       mainWindow.webContents.send('alert', 'このポートはすでに使用されています。');
+    });
+
+    ipc.on('closeServer', (ev) => {
+      server.close(() => {
+        console.log("server closed");
+      });
     });
   });
 
   ipc.on('move_to_url', (ev, url) => {
     mainWindow.loadURL('file://' + __dirname + '/dist/views/' + url);
   });
-
-  // for process debug
-  ipc.on('processLog', (ev, mes) => {
-    console.log(mes);
-  })
 });
