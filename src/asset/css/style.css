@@ -38,8 +38,10 @@ div.contents{
 }
 
 .modal{
-  width: 33%;
-  height:15%;
+  width: 50%;
+  height:20%;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
   position: absolute;
   left: 50%;
   top: 50%;
