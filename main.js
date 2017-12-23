@@ -77,4 +77,8 @@ app.on('ready', () => {
   ipc.on('move_to_url', (ev, url) => {
     mainWindow.loadURL('file://' + __dirname + '/dist/views/' + url);
   });
+
+  ipc.on('quit', (ev) => {
+    app.quit();
+  });
 });

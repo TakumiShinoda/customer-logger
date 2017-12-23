@@ -6,6 +6,12 @@ html, body{
   color: rgb(255, 255, 255);
 }
 
+ .quit{
+   margin: 30px;
+   width: 30px;
+   height: 30px;
+ }
+
 ul#content{
   list-style: none;
 }

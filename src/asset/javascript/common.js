@@ -26,3 +26,7 @@ function cur_view(){
 function load(url){
   ipcRenderer.send('move_to_url', url);
 }
+
+function quit(){
+  ipcRenderer.send('quit');
+}
