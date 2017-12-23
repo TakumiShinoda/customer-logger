@@ -2,9 +2,16 @@ div.modal.inputIPModal(tabindex="-1" role="dialog" aria-labelledby="staticModalL
   div.modal-dialog
     div.modal-content(style="background:rgb(0,0,0);")
       div.modal-body
-        center IPアドレス：
-          input.IPAdress(type='text' style='width:120px;')
-          span ：
-          input.serverPort(type='text' style='width:50px;')
-          input.btn.btn-success(type='button' value="接続" onclick='activate();')
-          input.btn.btn-primary(type='button' value="戻る" onclick='load("index/index.html");')
+        div.input-group
+          span.input-group-addon IPアドレス
+          input.IPAdress.form-control(type='text' style='width:20px;')
+        br
+        div.input-group
+          span.input-group-addon ポート番号
+          input.serverPort.form-control(type='text' style='width:10px;')
+        //- input.IPAdress(type='text' style='width:120px;')
+        //- span ：
+        //- input.serverPort(type='text' style='width:50px;')
+        div(align='right')
+          input.btn.btn-success.modal-footer-btn(type='button' value="接続" onclick='activate();')
+          input.btn.btn-primary.modal-footer-btn(type='button' value="戻る" onclick='load("index/index.html");')

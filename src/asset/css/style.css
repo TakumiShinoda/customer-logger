@@ -39,11 +39,18 @@ div.contents{
 
 .modal{
   width: 50%;
-  height:20%;
+  height:30%;
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.modal-footer-btn{
+  padding: 6px 28px;
+  font-size: 18px;
+  margin-top: 10px;
+  margin-left: 20px;
 }
