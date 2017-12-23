@@ -6,11 +6,11 @@ html, body{
   color: rgb(255, 255, 255);
 }
 
- .quit{
-   margin: 30px;
-   width: 30px;
-   height: 30px;
- }
+.quit{
+  margin: 30px;
+  width: 30px;
+  height: 30px;
+}
 
 ul#content{
   list-style: none;
@@ -33,8 +33,9 @@ ul#content{
   padding: 25px;
 }
 
-div.contents{
-  padding: 10px;
+.contents{
+  width: 98%;
+  margin: auto;
 }
 
 .modal{
@@ -48,9 +49,12 @@ div.contents{
   transform: translate(-50%, -50%);
 }
 
-.modal-footer-btn{
+.btn-temp{
   padding: 6px 28px;
   font-size: 18px;
+}
+
+.modal-footer-btn{
   margin-top: 10px;
   margin-left: 20px;
 }

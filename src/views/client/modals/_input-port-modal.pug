@@ -6,6 +6,6 @@ div.modal.inputLoginPortModal(tabindex="-1" role="dialog" aria-labelledby="stati
           span.input-group-addon ポート番号
           input.form-control.loginPort(type='text' style='width:120px;')
         div(align='right')
-          input.btn.btn-success.modal-footer-btn(type='button' value="接続" onclick='openServer($(".loginPort")[0].textContent)')
-          input.btn.btn-primary.modal-footer-btn(type='button' value="戻る" onclick='load("index/index.html");')
+          input.btn.btn-primary.modal-footer-btn.btn-temp(type='button' value="接続" onclick='openServer($(".loginPort")[0].textContent)')
+          input.btn.btn-secondary.modal-footer-btn.btn-temp(type='button' value="戻る" onclick='load("index/index.html");')
         

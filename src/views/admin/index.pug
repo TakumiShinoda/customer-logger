@@ -1,16 +1,20 @@
 include ../_header.pug
   include modals/_input-ip-modal.pug
   include modals/_accept-send-modal.pug
-  div.contents
-    p タスク:
-    select.task
-      option 追加
-      option 削除
-    br
-    br
-    p 番号:
-    input.customer-number(type='text')
-    br
-    br
-    input.btn.btn-success(type='button' value='送信' onclick='send();')
-    input.btn.btn-primary(type='button' value='接続解除' onclick='disconnect();load("index/index.html");')
+div.contents
+  H1 管理者モード
+  hr(color="white")
+div(align='right' style='margin-right:40px;')
+  input.btn.btn-danger.btn-temp(type='button' value='接続解除' onclick='disconnect();load("index/index.html");')
+    
+div(style='width:50%;margin:auto;')
+  label(style="font-size: 30px;") タスク:
+  select.form-control.col-3.task
+    option 追加
+    option 削除
+  br
+  label(style="font-size: 30px;") 番号:
+  input.form-control.col-3.customer-number(type='text')
+  br
+  br
+  input.btn.btn-success.btn-temp(type='button' value='送信' onclick='send();')
