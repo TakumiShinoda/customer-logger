@@ -44,17 +44,18 @@ ipcRenderer.on('serverOpend', (ev, port) => {
   $('.serverPort')[0].textContent = " | Port: " + port;
   $('.serverStatus')[0].textContent = 'Idle'
   $('.serverStatus').css('color', 'rgb(209, 150, 90)')
+  ipcRenderer.send('set_customerIds', 'init', 1);
   closeModal('inputLoginPortModal');
 });
 
 ipcRenderer.on('comp_activate', (ev, id) => {
-  console.log('pass')
   $('.serverStatus')[0].textContent = 'Connected'
   $('.serverStatus').css('color', 'rgb(152, 195, 121)')
 });
 
 ipcRenderer.on('addCustomer', (ev, id) => {
   customerInfo.push({'id': id, 'time': 120})
+  ipcRenderer.send('set_customerIds', 'add', id);
   var table = document.getElementById('table');
   var row = table.insertRow(-1);
 
@@ -67,6 +68,7 @@ ipcRenderer.on('deleteCustomer', (ev, id) => {
   var idList = [];
   var contentList = $('#customerList').children('span');
 
+  ipcRenderer.send('delete', id);
   for(var i = 0;i < contentList.length; i++){
     idList.push(contentList[i].textContent);
   }

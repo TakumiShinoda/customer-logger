@@ -11,6 +11,8 @@ var app = electron.app;
 var BrowserWindow = electron.BrowserWindow;
 let mainWindow;
 
+var customerIds = [];
+
 app.on('window-all-closed', () => {
   app.quit();
 });
@@ -29,17 +31,40 @@ app.on('ready', () => {
   ex.use(bodyParser.urlencoded({extended: true}));
   ex.use(bodyParser.json());
 
+  ipc.on('set_customerIds', (e, t, v) => {
+    switch(t){
+      case 'init':
+        customerIds = [];
+        break;
+      case 'add':
+        customerIds.push(v);
+        break;
+      case 'delete':
+        let index = customerIds.indexOf(v);
+        if(index > 0){
+          customerIds.splice(index, 1);
+        }
+        break;
+      default:
+        break;
+    }
+  });
+
   ipc.on('run_clientServer', (ev, port) => {
     let server = http.createServer(ex);
 
     server.listen(port, () => {
       mainWindow.webContents.send('serverOpend', server.address().port);
       ex.post('/', (req, res) => {
-          var data = req.body;
+          let data = req.body;
           switch(data.task){
             case 'add':
-              mainWindow.webContents.send('addCustomer', data.id);
-              res.send('Your requests sent\n');
+              if(customerIds.indexOf(data.id) < 0){
+                mainWindow.webContents.send('addCustomer', data.id);
+                res.send('Your requests sent\n');
+              }else{
+                res.send('error');
+              }
               break;
             case 'delete':
               mainWindow.webContents.send('deleteCustomer', data.id);
