@@ -61,9 +61,9 @@ app.on('ready', () => {
             case 'add':
               if(customerIds.indexOf(data.id) < 0){
                 mainWindow.webContents.send('addCustomer', data.id);
-                res.send('Your requests sent\n');
+                res.send('送信完了');
               }else{
-                res.send('error');
+                res.send('このIDは既に登録されています。');
               }
               break;
             case 'delete':

@@ -8,6 +8,7 @@ $(document).ready(() => {
 function send(){
   var task = $('.task')[0].value;
   var number = parseInt($('.customer-number')[0].value);
+
   switch(task){
     case '追加':
       $.ajax({
@@ -16,6 +17,7 @@ function send(){
         headers: {'Content-Type':'application/json'},
         data: '{"task": "add", "id": '+number+'}',
         success: function(data){
+            $('.recipient')[0].textContent = data;
             openModal('sendCompModal');
             setTimeout(() => {
               closeModal('sendCompModal')
