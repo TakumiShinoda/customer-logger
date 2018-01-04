@@ -6,10 +6,9 @@
   "scripts": {
     "start": "gulp start",
     "pug": "gulp pug_compile",
-    "test-pack-darwinx64": "rm -R customer-timer-darwin-x64 && node build/darwinx64.js",
+    "test-pack-darwinx64": "rm -R customer-timer-darwin-x64 || node build/darwinx64.js && node build/darwinx64.js",
     "test-pack-win32x64": "electron-packager . test --platform=win32 --arch=x64 --prune=true --version=1.7.9",
     "test-pack-linuxx64": "electron-packager . test --platform=linux --arch=x64 --prune=true --version=1.7.9",
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
