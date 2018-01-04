@@ -4,8 +4,8 @@ const electron = require("electron");
 const ipc = electron.ipcMain;
 const express = require('express')
 const http = require('http')
-const ex = express();
 const bodyParser = require('body-parser')
+const ex = express();
 
 var app = electron.app;
 var BrowserWindow = electron.BrowserWindow;
@@ -31,28 +31,10 @@ app.on('ready', () => {
   ex.use(bodyParser.urlencoded({extended: true}));
   ex.use(bodyParser.json());
 
-  ipc.on('set_customerIds', (e, t, v) => {
-    switch(t){
-      case 'init':
-        customerIds = [];
-        break;
-      case 'add':
-        customerIds.push(v);
-        break;
-      case 'delete':
-        let index = customerIds.indexOf(v);
-        if(index > 0){
-          customerIds.splice(index, 1);
-        }
-        break;
-      default:
-        break;
-    }
-  });
-
   ipc.on('run_clientServer', (ev, port) => {
     let server = http.createServer(ex);
 
+    set_customerIds('init', 1);
     server.listen(port, () => {
       mainWindow.webContents.send('serverOpend', server.address().port);
       ex.post('/', (req, res) => {
@@ -61,6 +43,7 @@ app.on('ready', () => {
             case 'add':
               if(customerIds.indexOf(data.id) < 0){
                 mainWindow.webContents.send('addCustomer', data.id);
+                set_customerIds('add', data.id);
                 res.send('送信完了');
               }else{
                 res.send('このIDは既に登録されています。');
@@ -69,8 +52,8 @@ app.on('ready', () => {
             case 'delete':
               if(customerIds.indexOf(data.id) > -1){
                 mainWindow.webContents.send('deleteCustomer', data.id);
-                customerIds.splice(customerIds.indexOf(data.id), 1);
-                res.send('送信完了\n');
+                set_customerIds('delete', data.id);
+                res.send('送信完了');
               }else{
                 res.send('このIDは登録されていません。');
               }
@@ -112,3 +95,24 @@ app.on('ready', () => {
     app.quit();
   });
 });
+
+// methods
+
+function set_customerIds(t, v){
+  switch(t){
+    case 'init':
+      if(v == 1){customerIds = [];}
+      break;
+    case 'add':
+      customerIds.push(v);
+      break;
+    case 'delete':
+      let index = customerIds.indexOf(v);
+      if(index > -1){
+        customerIds.splice(index, 1);
+      }
+      break;
+    default:
+      break;
+  }
+}
