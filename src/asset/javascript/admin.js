@@ -35,7 +35,7 @@ function send(){
         headers: {'Content-Type':'application/json'},
         data: '{"task": "delete", "id": '+number+'}',
         success: function(data){
-            console.log(data)
+            $('.recipient')[0].textContent = data;
             openModal('sendCompModal');
             setTimeout(() => {
               closeModal('sendCompModal')

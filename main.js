@@ -67,8 +67,13 @@ app.on('ready', () => {
               }
               break;
             case 'delete':
-              mainWindow.webContents.send('deleteCustomer', data.id);
-              res.send('Your requests sent\n');
+              if(customerIds.indexOf(data.id) > -1){
+                mainWindow.webContents.send('deleteCustomer', data.id);
+                customerIds.splice(customerIds.indexOf(data.id), 1);
+                res.send('送信完了\n');
+              }else{
+                res.send('このIDは登録されていません。');
+              }
               break;
             case 'log':
               mainWindow.webContents.send('ipc_log', data.id);
