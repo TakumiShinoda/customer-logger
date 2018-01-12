@@ -1,15 +1,12 @@
-const ipcRenderer = require('electron').ipcRenderer;
-const Validator = require('validatorjs')
-
 window.onbeforeunload = () => {
     ipcRenderer.send('closeServer');
 };
 
-function openModal(name){
+window.openModal = (name) => {
   $('.' + name).modal();
 }
 
-function closeModal(name){
+window.closeModal = (name) => {
   $('.' + name).modal('hide');
 }
 
@@ -17,16 +14,10 @@ ipcRenderer.on('alert', (ev, mes) => {
   alert(mes);
 });
 
-function cur_view(){
-  var url = location.pathname;
-  var urlArr = url.split('/');
-  return urlArr[urlArr.length - 2];
-}
-
-function load(url){
+window.load = (url) => {
   ipcRenderer.send('move_to_url', url);
 }
 
-function quit(){
+window.quit = () => {
   ipcRenderer.send('quit');
 }
