@@ -5,7 +5,7 @@ $(document).ready(() => {
   openModal('inputIPModal');
 });
 
-function send(){
+window.send = () => {
   var task = $('.task')[0].value;
   var number = parseInt($('.customer-number')[0].value);
 
@@ -52,7 +52,7 @@ function send(){
   }
 }
 
-function activate(){
+window.activate = () => {
   let ipAdress = $('.IPAdress')[0].value;
   let port = $('.serverPort')[0].value;
   let vldobj = {'ip': ipAdress, 'port': port};
@@ -83,7 +83,7 @@ function activate(){
   }
 }
 
-function disconnect(){
+window.disconnect = () => {
   console.log(connectedUrl)
   $.ajax({
     url: connectedUrl,

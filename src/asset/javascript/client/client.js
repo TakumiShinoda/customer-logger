@@ -27,7 +27,7 @@ $(document).ready(() => {
   }, 60000);
 });
 
-function openServer(){
+window.openServer =  () => {
   var port = $('.loginPort')[0].value;
   if(new Validator({port: port}, {port: 'required'}).fails()){
     alert('ポート番号を入力してください。');
