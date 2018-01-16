@@ -19,11 +19,14 @@
     "validatorjs": "^3.13.6"
   },
   "devDependencies": {
+    "css-loader": "^0.28.8",
     "electron": "^1.7.10",
     "electron-connect": "^0.6.2",
     "electron-packager": "^10.1.0",
     "gulp": "^3.9.1",
     "gulp-pug": "^3.3.0",
+    "postcss-loader": "^2.0.10",
+    "style-loader": "^0.19.1",
     "webpack": "^3.10.0",
     "webpack-stream": "^4.0.0"
   }
