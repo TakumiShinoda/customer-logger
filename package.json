@@ -16,13 +16,14 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "validatorjs": "^3.13.6"
+    "jquery": "^1.12.4",
+    "validatorjs": "^3.14.2"
   },
   "devDependencies": {
     "css-loader": "^0.28.8",
-    "electron": "^1.7.10",
-    "electron-connect": "^0.6.2",
-    "electron-packager": "^10.1.0",
+    "electron": "^1.8.1",
+    "electron-connect": "^0.6.3",
+    "electron-packager": "^10.1.1",
     "gulp": "^3.9.1",
     "gulp-pug": "^3.3.0",
     "postcss-loader": "^2.0.10",

@@ -33,11 +33,12 @@ gulp.task('pack', () => {
 });
 
 gulp.task('start', () =>{
-  electron.start();
   gulp.run('pack');
 
   gulp.watch(['./src/**'], () =>{
     gulp.run('pack');
   });
   gulp.watch(['./main.js'], electron.restart);
+
+  electron.start();
 });
