@@ -1,3 +1,5 @@
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = {
   config: (routes) => {
     return {
@@ -12,10 +14,13 @@ module.exports = {
           },
           {
             test: /\.css$/,
-            loaders: ['style-loader', 'css-loader'],
+            loader: ExtractTextPlugin.extract('css-loader'),
           },
         ]
       },
+      plugins: [
+        new ExtractTextPlugin('../css/bundle.css'),
+      ]
     };
   }
 }
