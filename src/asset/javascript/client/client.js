@@ -58,20 +58,20 @@ ipcRenderer.on('addCustomer', (ev, id) => {
   var row = table.insertRow(-1);
 
   row.className = id
-  row.insertCell(-1).innerHTML = '<span id=customerList class='+ id +'><span class='+ id +'>'+ id +'</span>'
+  row.insertCell(-1).innerHTML = '<span class="customerList '+ id +'"><span class='+ id +'>'+ id +'</span>'
   row.insertCell(-1).innerHTML = '<span class=timer'+id+'>120</span>分</span>';
 });
 
 ipcRenderer.on('deleteCustomer', (ev, id) => {
   var idList = [];
-  var contentList = $('#customerList').children('span');
+  var contentList = $('.customerList').children('span');
 
   ipcRenderer.send('delete', id);
   for(var i = 0;i < contentList.length; i++){
     idList.push(contentList[i].textContent);
   }
 
-  if(idList.indexOf(String(id)) >= 0){
+  if(idList.indexOf(String(id)) > -1){
     $('.'+String(id)).remove();
   }else{
     console.log('can not find')
