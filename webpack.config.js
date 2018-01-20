@@ -1,4 +1,6 @@
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyEsPlugin = require('uglify-es-webpack-plugin');
 
 module.exports = {
   config: (routes) => {
@@ -14,13 +16,14 @@ module.exports = {
           },
           {
             test: /\.css$/,
-            loader: ExtractTextPlugin.extract('css-loader'),
+            loader: ExtractTextPlugin.extract('css-loader?minimize'),
           },
         ]
       },
       plugins: [
         new ExtractTextPlugin('../css/bundle.css'),
-      ]
+        new UglifyEsPlugin(),
+      ],
     };
   }
 }

@@ -22,8 +22,14 @@ gulp.task('pug_compile', () => {
 });
 
 gulp.task('asset_copy', () => {
-  gulp.src(['src/asset/**'], {base: 'src/asset'})
-  .pipe(gulp.dest('./dist/asset'));
+  gulp.src(['src/asset/javascript/modules/**'], {base: 'src/asset/javascript/modules'})
+  .pipe(gulp.dest('./dist/asset/modules'));
+
+  gulp.src(['src/asset/javascript/dependencies.js'], {base: 'src/asset/javascript/'})
+  .pipe(gulp.dest('./dist/asset/javascript'));
+
+  gulp.src(['src/asset/images/**'], {base: 'src/asset/images'})
+  .pipe(gulp.dest('./dist/asset/images'));
 });
 
 gulp.task('pack', () => {
