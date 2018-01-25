@@ -20,10 +20,17 @@ app.on('window-all-closed', () => {
 app.on('ready', () => {
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 600
+    height: 600,
+    backgroundColor: 'rgb(40, 44, 52)'
   });
+  mainWindow.hide();
   mainWindow.setFullScreen(true);
   mainWindow.loadURL('file://' + __dirname + '/dist/views/index/index.html');
+
+  mainWindow.webContents.on('did-finish-load', ()=>{
+    mainWindow.show();
+  });
+
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
